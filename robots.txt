@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /assets/lang/
+Disallow: /*lang=kk
+
+User-agent: AdsBot-Google
+User-agent: AdsBot-Google-Mobile
+Disallow: /assets/lang/
+Disallow: /*lang=kk
+
+Sitemap: https://service.kaztomograph.com/sitemap.xml
