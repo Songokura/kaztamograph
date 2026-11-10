@@ -116,6 +116,17 @@ if(qp==='ru'||qp==='kk')initial=qp;
 else{try{if(localStorage.getItem('lang')==='kk')initial='kk'}catch(e){}}
 if(initial==='kk')setLang('kk',false);
 
+
+// ---------- Google Ads conversions ----------
+var CONV={phone:'AW-18553830574/sFkWCL_MvLUdEK75k49F',contact:'AW-18553830574/x9QICNX4wrUdEK75k49F',form:'AW-18553830574/_6bFCMDDwrUdEK75k49F'};
+function conv(k){if(typeof window.gtag==='function')window.gtag('event','conversion',{send_to:CONV[k],value:1.0,currency:'USD',transport_type:'beacon'})}
+window.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;if(!a)return;
+  var h=a.getAttribute('href')||'';
+  if(h.indexOf('tel:')===0)conv('phone');
+  else if(h.indexOf('wa.me')>-1||h.indexOf('mailto:')===0)conv('contact');
+},true);
+
 // ---------- form -> WhatsApp ----------
 var form=document.getElementById('lead-form');
 form.addEventListener('submit',function(e){
@@ -123,6 +134,7 @@ form.addEventListener('submit',function(e){
   var ph=form.phone.value.replace(/\D/g,'');
   if(ph.length<10){form.phone.focus();form.phone.setAttribute('aria-invalid','true');return}
   form.phone.removeAttribute('aria-invalid');
+  conv('form');
   var K=document.documentElement.lang==='kk'&&window.SITE_KK?window.SITE_KK:{};
   function t(k,ru){return K[k]||ru}
   var lines=[t('wa.hello','Здравствуйте! Заявка инженеру:'),
